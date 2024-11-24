@@ -3,16 +3,11 @@ import { Tabs } from './components/Tabs';
 import { TodoInput } from './components/TodoInput';
 import { TodoList } from './components/TodoList';
 
-//* Hooks
+//* MARK: Hooks
 import { useEffect, useState } from 'react';
 
 function App() {
-  // const todos = [
-  //   { input: 'Hello! Add your first todo!', complete: true },
-  //   { input: 'Get the groceries!', complete: false },
-  //   { input: 'Learn how to web design', complete: false },
-  //   { input: 'Say hi to gran gran', complete: true },
-  // ];
+  //* MARK: State
 
   const [todos, setTodos] = useState([
     { input: 'Hello! Add your first todo!', complete: true },
@@ -20,10 +15,18 @@ function App() {
 
   const [selectedTab, setSelectedTab] = useState('Open');
 
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  //* MARK: Functions
+  
+  function toggleDarkMode() {
+    setIsDarkMode((prevMode) => !prevMode);
+  }
+
   function handleAddTodo(newTodo) {
     const newTodoList = [...todos, { input: newTodo, complete: false }];
     setTodos(newTodoList);
-    handleSaveData(newTodoList)
+    handleSaveData(newTodoList);
   }
 
   function handleCompleteTodo(index) {
@@ -33,7 +36,7 @@ function App() {
     CompletedTodo['complete'] = true;
     newTodoList[index] = CompletedTodo;
     setTodos(newTodoList);
-    handleSaveData(newTodoList)
+    handleSaveData(newTodoList);
   }
 
   function handleDeleteTodo(index) {
@@ -42,12 +45,14 @@ function App() {
       return index !== valIndex;
     });
     setTodos(newTodoList);
-    handleSaveData(newTodoList)
+    handleSaveData(newTodoList);
   }
 
   function handleSaveData(currentTodos) {
     localStorage.setItem('todo-app', JSON.stringify({ todos: currentTodos }));
   }
+
+  //* MARK: Effects
 
   useEffect(() => {
     if (!localStorage || !localStorage.getItem('todo-app')) return;
@@ -55,8 +60,24 @@ function App() {
     setTodos(db.todos);
   }, []);
 
+  useEffect(() => {
+    document.body.style.background = isDarkMode
+      ? 'var(--background-primary, #05070f)'
+      : 'var(--background-primary, white)';
+    document.body.style.color = isDarkMode
+      ? 'var(--color-primary, white)'
+      : 'var(--color-primary, black)';
+  }, [isDarkMode]);
+
   return (
     <>
+      <button onClick={toggleDarkMode}>
+        {isDarkMode ? (
+          <i className="fa-solid fa-toggle-on"></i>
+        ) : (
+          <i className="fa-solid fa-toggle-off"></i>
+        )}{' '}
+      </button>
       <Header todos={todos} />
       <Tabs
         selectedTab={selectedTab}
