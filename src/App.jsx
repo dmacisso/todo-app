@@ -71,7 +71,7 @@ function App() {
 
   return (
     <>
-      <button onClick={toggleDarkMode}>
+      <button onClick={toggleDarkMode}> Switch to { isDarkMode ? 'Light' : 'Dark'} mode...
         {isDarkMode ? (
           <i className="fa-solid fa-toggle-on"></i>
         ) : (
