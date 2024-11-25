@@ -15,7 +15,7 @@ function App() {
 
   const [selectedTab, setSelectedTab] = useState('Open');
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   //* MARK: Functions
 
