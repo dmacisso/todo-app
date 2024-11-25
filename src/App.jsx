@@ -18,7 +18,7 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   //* MARK: Functions
-  
+
   function toggleDarkMode() {
     setIsDarkMode((prevMode) => !prevMode);
   }
@@ -47,6 +47,19 @@ function App() {
     setTodos(newTodoList);
     handleSaveData(newTodoList);
   }
+  function handleEditTodo(index) {
+    // edit
+    let newTodoList = [...todos];
+    let editedTodo = todos[index];
+    editedTodo['complete'] = false;
+    newTodoList[index] = editedTodo;
+
+    // let newTodoList = todos.filter((val, valIndex) => {
+    //   return index !== valIndex;
+    // });
+    setTodos(newTodoList);
+    handleSaveData(newTodoList);
+  }
 
   function handleSaveData(currentTodos) {
     localStorage.setItem('todo-app', JSON.stringify({ todos: currentTodos }));
@@ -71,7 +84,9 @@ function App() {
 
   return (
     <>
-      <button onClick={toggleDarkMode}> Switch to { isDarkMode ? 'Light' : 'Dark'} mode...
+      <button onClick={toggleDarkMode}>
+        {' '}
+        Switch to {isDarkMode ? 'Light' : 'Dark'} mode...
         {isDarkMode ? (
           <i className="fa-solid fa-toggle-on"></i>
         ) : (
@@ -86,6 +101,7 @@ function App() {
       />
       <TodoList
         handleDeleteTodo={handleDeleteTodo}
+        // handleEditTodo={handleEditTodo}
         handleCompleteTodo={handleCompleteTodo}
         todos={todos}
         selectedTab={selectedTab}

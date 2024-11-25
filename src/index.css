@@ -112,7 +112,7 @@ hr {
 
 .todo-item p {
   font-weight: 500;
-  color: black
+  color: #030615
 }
 
 .input-container {
@@ -125,6 +125,7 @@ hr {
   width: 100%;
   flex: 1;
   max-width: unset !important;
+  color: #030615
 }
 
 @keyframes widen {

@@ -3,6 +3,7 @@
 export function TodoCard({
   todo,
   handleDeleteTodo,
+  handleEditTodo,
   todoIndex,
   handleCompleteTodo,
 }) {
@@ -21,6 +22,13 @@ export function TodoCard({
         >
           <h6>Done</h6>
         </button>
+        {/* <button
+          onClick={() => {
+            handleEditTodo(todoIndex);
+          }}
+        >
+          <h6>Edit</h6>
+        </button> */}
         <button
           onClick={() => {
             handleDeleteTodo(todoIndex);
